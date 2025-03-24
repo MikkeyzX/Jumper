@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 24752867e620c7c4bb1d30ddd1d6b228
+guid: 5770d55bf47664e4aaaf1759a4852934
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7884697795868523336
-    second: LRogBarrier_0
+      213: 4219165411017971838
+    second: stage1BG_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LRogBarrier_0
+      name: stage1BG_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
-        height: 9
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 84b7c04ded21c6d60800000000000000
-      internalID: 7884697795868523336
+      spriteID: e785754569c7d8a30800000000000000
+      internalID: 4219165411017971838
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LRogBarrier_0: 7884697795868523336
+      stage1BG_0: 4219165411017971838
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
