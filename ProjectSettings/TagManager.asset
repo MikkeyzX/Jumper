@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - DashUnlock
+  - Gracz
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
     locked: 0
   - name: "T\u0142o"
     uniqueID: 500954989
+    locked: 0
+  - name: pomiedzy
+    uniqueID: 3989994041
     locked: 0
   - name: ground
     uniqueID: 3020127055
