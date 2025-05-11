@@ -14,13 +14,13 @@ public class GraczRuchISkok : MonoBehaviour
     private bool isDashing;
     private float dashTimer;
     private float dashCooldownTimer;
-    private bool canDash = false; // ❌ Dash na początku zablokowany
-    private float originalGravityScale; // 🟢 Do zapamiętania grawitacji
+    private bool canDash = false;
+    private float originalGravityScale;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        originalGravityScale = rb.gravityScale; // Zapisujemy normalną grawitację
+        originalGravityScale = rb.gravityScale;
     }
 
     void Update()
@@ -28,19 +28,16 @@ public class GraczRuchISkok : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
 
         // Skakanie
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && !isDashing)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             isGrounded = false;
         }
 
-        // Sprawdzanie cooldownu Dasha
+        // Dash
         if (dashCooldownTimer > 0)
-        {
             dashCooldownTimer -= Time.deltaTime;
-        }
 
-        // Dash - jeśli jest odblokowany i cooldown się skończył
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && dashCooldownTimer <= 0)
         {
             StartDash();
@@ -63,6 +60,23 @@ public class GraczRuchISkok : MonoBehaviour
         }
     }
 
+    void StartDash()
+    {
+        isDashing = true;
+        dashTimer = dashTime;
+        dashCooldownTimer = dashCooldown;
+
+        rb.gravityScale = 0;
+        float dashDirection = movement.x != 0 ? movement.x : transform.localScale.x;
+        rb.linearVelocity = new Vector2(dashDirection * dashSpeed, 0);
+    }
+
+    void StopDash()
+    {
+        isDashing = false;
+        rb.gravityScale = originalGravityScale;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -73,28 +87,17 @@ public class GraczRuchISkok : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Jeśli gracz dotknie specjalnego bloku, odblokowuje dash
-        if (other.gameObject.CompareTag("DashUnlock"))
+        if (other.CompareTag("DashUnlock"))
         {
             canDash = true;
-            Debug.Log("Dash odblokowany! 🚀");
+            Debug.Log("Dash odblokowany!");
         }
-    }
 
-    void StartDash()
-    {
-        isDashing = true;
-        dashTimer = dashTime;
-        dashCooldownTimer = dashCooldown;
-
-        rb.gravityScale = 0; // ❌ Wyłączamy grawitację
-        rb.linearVelocity = new Vector2(movement.x != 0 ? movement.x * dashSpeed : transform.localScale.x * dashSpeed, 0);
-        // Jeśli gracz stoi, dashuje w kierunku, w którym jest obrócony
-    }
-
-    void StopDash()
-    {
-        isDashing = false;
-        rb.gravityScale = originalGravityScale; // ✅ Przywracamy normalną grawitację
+        if (other.CompareTag("Finishs"))
+        {
+            GameTimer timer = FindObjectOfType<GameTimer>();
+            if (timer != null)
+                timer.StopTimer();
+        }
     }
 }
