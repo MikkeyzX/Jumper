@@ -3858,9 +3858,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1063888091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c2afc2a888c8bf49b2f5bd63f380a23, type: 3}
+  m_Script: {fileID: 11500000, guid: a3fc79ac322590b41b7711dee420ac56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1463527530}
 --- !u!4 &1090949418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1711442003277598718, guid: 3c2b7aa1df7ee6f42874950b72d93596, type: 3}
