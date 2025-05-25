@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Text timeText;
-    public Text finalScoreText;
+    public Text timeText;             // Pokazuje czas w grze
+    public Text finalScoreText;       // Pokazuje wynik na koñcu
+    public float maxLevelTime = 120f; // Czas maksymalny do obliczania bonusu
 
-    public float maxLevelTime = 120f; // Maksymalny czas dla punktów bonusowych
     private float timer = 0f;
     private int coinsCollected = 0;
     private bool levelEnded = false;
@@ -35,6 +35,5 @@ public class GameManager : MonoBehaviour
 
         finalScoreText.text = "WYNIK: " + finalScore;
         finalScoreText.gameObject.SetActive(true);
-        Debug.Log("Wynik koñcowy: " + finalScore);
     }
 }
