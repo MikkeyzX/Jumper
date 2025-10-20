@@ -1,39 +1,45 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public Text timeText;             // Pokazuje czas w grze
-    public Text finalScoreText;       // Pokazuje wynik na koñcu
-    public float maxLevelTime = 120f; // Czas maksymalny do obliczania bonusu
+    public static GameManager Instance { get; private set; }
 
-    private float timer = 0f;
-    private int coinsCollected = 0;
-    private bool levelEnded = false;
+    public float elapsedTime { get; private set; } = 0f;
+    public bool isRunning { get; private set; } = true;
 
-    void Update()
+    private void Awake()
     {
-        if (!levelEnded)
+        if (Instance == null)
         {
-            timer += Time.deltaTime;
-            timeText.text = "Czas: " + timer.ToString("F1") + "s";
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
         }
     }
 
-    public void AddCoin()
+    private void Update()
     {
-        coinsCollected++;
+        if (!isRunning) return;
+        elapsedTime += Time.deltaTime;
     }
 
-    public void EndLevel()
+    public void EndGame()
     {
-        levelEnded = true;
+        if (!isRunning) return;
+        isRunning = false;
+        SceneManager.LoadScene("GameOver"); // upewnij siê, ¿e scena ma dok³adnie tak¹ nazwê i jest w Build Settings
+    }
 
-        int coinPoints = coinsCollected * 10;
-        float timeBonus = Mathf.Max(0, (maxLevelTime - timer)) * 2f;
-        int finalScore = coinPoints + Mathf.RoundToInt(timeBonus);
-
-        finalScoreText.text = "WYNIK: " + finalScore;
-        finalScoreText.gameObject.SetActive(true);
+    public string GetFormattedTime()
+    {
+        int minutes = Mathf.FloorToInt(elapsedTime / 60f);
+        int seconds = Mathf.FloorToInt(elapsedTime % 60f);
+        int fraction = Mathf.FloorToInt((elapsedTime - Mathf.Floor(elapsedTime)) * 100f);
+        return string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, fraction);
     }
 }
