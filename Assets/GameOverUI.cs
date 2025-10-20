@@ -14,8 +14,9 @@ public class GameOverUI : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
+            GameManager gm = FindObjectOfType<GameManager>();
             if (timeText != null)
-                timeText.text = "Twój czas: " + GameManager.Instance.GetFormattedTime();
+                timeText.text = "Twój czas: " + GameManager.Instance.GetFormattedTime() + " twoj wynik " + gm.iScore ;
         }
         else
         {

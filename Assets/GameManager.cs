@@ -1,10 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
+    public GameObject scoreObject;
+    public int iScore = 0;
     public float elapsedTime { get; private set; } = 0f;
     public bool isRunning { get; private set; } = true;
 
@@ -28,6 +30,11 @@ public class GameManager : MonoBehaviour
         elapsedTime += Time.deltaTime;
     }
 
+    public void AddScore()
+    {
+        iScore++;
+        scoreObject.GetComponent<TextMeshProUGUI>().SetText(iScore.ToString());
+    }
     public void EndGame()
     {
         if (!isRunning) return;

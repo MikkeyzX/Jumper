@@ -9,7 +9,7 @@ public class Monetka : MonoBehaviour
             GameManager gm = FindObjectOfType<GameManager>();
             if (gm != null)
             {
-            
+                gm.AddScore();  
             }
 
             Destroy(gameObject);
